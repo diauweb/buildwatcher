@@ -4,11 +4,12 @@ from aiohttp import web
 import argparse
 import os
 
-AUTH_TOKEN = '8593EF813528FADBF0975322B41211DA8D4E4C78C25F2049AF75DA7567AC875A'
+AUTH_TOKEN = None
 
 parser = argparse.ArgumentParser(description="Build updater daemon")
-parser.add_argument('--path')
-parser.add_argument('--port')
+parser.add_argument('--path' )
+parser.add_argument('--port' )
+parser.add_argument('--token')
 
 
 async def built(request):
@@ -23,6 +24,16 @@ async def built(request):
 if __name__ == '__main__':
     app = web.Application()
     app.add_routes([web.get('/notifier/build_ok/{pass}', built)])
-
+    
     args = parser.parse_args()
+
+    if args.token is None:
+        if not os.path.isfile('./TOKEN'):
+            print('No predefined token!')
+            exit()
+        else: 
+            with open('./TOKEN','r') as f:
+                AUTH_TOKEN = f.readline()
+    else: AUTH_TOKEN = args.token
+
     web.run_app(app, path=args.path, port=args.port)
