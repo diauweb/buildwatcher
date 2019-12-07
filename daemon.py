@@ -4,7 +4,7 @@ from aiohttp import web
 import argparse
 import os
 
-AUTH_TOKEN = '8593EF813528FADBF0975322B41211DA8D4E4C78C25F2049AF75DA7567AC875A'
+AUTH_TOKEN = '### REPLACE_WITH_YOUR_TOKEN ###'
 
 parser = argparse.ArgumentParser(description="Build updater daemon")
 parser.add_argument('--path')
