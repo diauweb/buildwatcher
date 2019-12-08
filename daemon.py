@@ -33,7 +33,7 @@ if __name__ == '__main__':
             exit()
         else: 
             with open('./TOKEN','r') as f:
-                AUTH_TOKEN = f.readline()
-    else: AUTH_TOKEN = args.token
+                AUTH_TOKEN = f.readline().strip()
+    else: AUTH_TOKEN = args.token.strip()
 
     web.run_app(app, path=args.path, port=args.port)
